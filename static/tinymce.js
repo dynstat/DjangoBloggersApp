@@ -33,7 +33,7 @@ tinymce.init({
     // resize: 'both',
     statusbar: true,
     toolbar:
-      "insert | undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright | bullist numlist | outdent indent | link image code",
+      "insert | undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright | bullist numlist | outdent indent | link image code | save",
     toolbar1:
       "save insert | undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright | bullist numlist | outdent indent | link image code",
     // toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',

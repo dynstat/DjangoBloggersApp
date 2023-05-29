@@ -1,7 +1,8 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>CodePen - Customizing Tiny MCE HTML Editor</title>
@@ -9,22 +10,23 @@
   <link rel="stylesheet" href="{% static 'tinymce.css' %}">
 
 </head>
+
+
 <body>
-<!-- partial:index.partial.html -->
-<div id="html-app" class="container-fluid">
-  <div class="row">
-    <div class="col">
-  <form method="post">
-    <textarea id="textarea" name="textarea">
+  <!-- partial:index.partial.html -->
+  <div id="html-app" class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <form method="post" action="tinymce_save/{{  }}">
+          {% csrf_token %}
+          <textarea id="textarea" name="textarea">
+          </textarea>
+          <button name="submitbtn"> Save Form</button>
+          <!--     <button name="submitbtn">Save</button> -->
+        </form>
 
-    
-    test
-    </textarea> 
-<!--     <button name="submitbtn">Save</button> -->
-  </form>
-
-    </div>
-<!-- <div class="col">
+      </div>
+      <!-- <div class="col">
 
   <form method="post">
     <div editable id="divarea">
@@ -33,12 +35,12 @@
   </form>
 
 </div> -->
+    </div>
+
   </div>
 
-</div>
-
-<!--       <div id="lipsum"> -->
-<!-- <p> Finished on media button https://www.tinymce.com/docs/plugins/media/<br>
+  <!--       <div id="lipsum"> -->
+  <!-- <p> Finished on media button https://www.tinymce.com/docs/plugins/media/<br>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt, lacus ut sollicitudin volutpat, nisl nisi fringilla orci, nec vulputate purus erat vitae velit. Mauris vestibulum nibh et efficitur placerat. Nullam in ligula ac justo finibus finibus. Fusce et elementum nisl. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque nec nisi et lorem tincidunt laoreet. Ut at tortor in ex elementum vehicula sed ac ligula. Curabitur viverra ultrices mi ac commodo. In in luctus urna. Aliquam blandit massa id sodales sodales.
 </p>
 <p class="mceNonEditable_deletethis">
@@ -53,10 +55,11 @@ Nullam malesuada justo ac leo tempor ullamcorper. Quisque et blandit lectus, vit
 <p>
 Fusce quis enim feugiat, aliquam mauris at, faucibus velit. Pellentesque varius, neque id pulvinar porttitor, nunc velit scelerisque est, sit amet dictum mauris augue eu nisl. Aenean semper consectetur ligula. Curabitur molestie, nibh eget feugiat faucibus, quam elit bibendum ex, et facilisis est nisi vel eros. Integer at pellentesque orci. Fusce facilisis laoreet metus quis condimentum. Suspendisse pretium ornare euismod. In eu massa vel enim interdum scelerisque quis ac risus. Suspendisse porttitor a quam sed sagittis. Suspendisse tortor odio, volutpat eget sollicitudin et, eleifend id est. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas tincidunt, odio ac congue suscipit, nunc eros varius mi, nec placerat purus ipsum nec odio.
 </p></div>-->
-<!-- partial -->
+  <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.2/tinymce.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js'></script>
-<script  src="{% static 'tinymce.js' %}"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js'></script>
+  <script src="{% static 'tinymce.js' %}"></script>
 
 </body>
+
 </html>

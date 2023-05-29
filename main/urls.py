@@ -18,5 +18,6 @@ urlpatterns = [
          name="reset"),
     path('dashboard/', views.dashboard, name="dashboard"),
     path('tinymce/', views.tinymce, name="tinymce"),
+    path('tinymce_save/', views.tinymce_save, name="tinymce_save"),
 ]
 urlpatterns += staticfiles_urlpatterns()
