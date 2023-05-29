@@ -1,7 +1,8 @@
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Django Bloggers ❄️</title>
@@ -9,49 +10,55 @@
 
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link href="{% static 'land.css' %}" rel = "stylesheet">
+  <link href="{% static 'land.css' %}" rel="stylesheet">
 
 
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<!-- Canvas -->
-<canvas class="orb-canvas"></canvas>
-<!-- Overlay -->
-<div class="overlay">
-  <!-- Overlay inner wrapper -->
-  <div class="overlay__inner">
-    <!-- Title -->
-    <h1 class="overlay__title">
-      At <span class="text-gradient">Django Bloggers</span>, we believe in the power of words.
-      We are a community of passionate writers and bloggers who come together 
-      to share our thoughts and experiences. 
-    </h1>
-    <!-- Description -->
-    <p class="overlay__description">
-      Are you ready to embark on a blogging journey like no other? 
-      Sign up today and become part of the Django Bloggers community.
-      Unleash your creativity, amplify your voice, and make a lasting 
-      impact in the blogosphere..
-      <strong>We're gonna talk accessibility, too.</strong>
-    </p>
-    <!-- Buttons -->
-    <div class="overlay__btns">
+  <!-- partial:index.partial.html -->
+  <!-- Canvas -->
+  <canvas class="orb-canvas"></canvas>
+  <!-- Overlay -->
+  <div class="overlay">
+    <!-- Overlay inner wrapper -->
+    <div class="overlay__inner">
+      <!-- Title -->
+      <h1 class="overlay__title">
+        At <span class="text-gradient">Django Bloggers</span>, we believe in the power of words.
+        We are a community of passionate writers and bloggers who come together
+        to share our thoughts and experiences.
+      </h1>
+      <!-- Description -->
+      <p class="overlay__description">
+        Are you ready to embark on a blogging journey like no other?
+        Sign up today and become part of the Django Bloggers community.
+        Unleash your creativity, amplify your voice, and make a lasting
+        impact in the blogosphere..
+        <strong>We're gonna talk accessibility, too.</strong>
+      </p>
+      <!-- Buttons -->
+      <div class="overlay__btns">
 
-      <button class="overlay__btn overlay__btn--colors">
-        <a href="{% url 'signup' %}" >SIGN UP</a>
-      </button>
+        <button class="overlay__btn overlay__btn--colors">
+          <a href="{% url 'signup' %}">SIGN UP</a>
+        </button>
 
-      <button class="overlay__btn overlay__btn--colors">
-        <a href="{% url 'login' %}" >CREATE YOUR BLOG</a>
-        {% comment %} <span class="overlay__btn-emoji">🎨</span> {% endcomment %}
-      </button>
+        <button class="overlay__btn overlay__btn--colors">
+          {% if user_login %}
+          <a href="{% url 'dashboard' %}">CREATE YOUR BLOG</a>
+          {% else %}
+          <a href="{% url 'login' %}">CREATE YOUR BLOG</a>
+          {% endif %}
+          {% comment %} <span class="overlay__btn-emoji">🎨</span> {% endcomment %}
+        </button>
+      </div>
     </div>
   </div>
-</div>
-<!-- partial -->
+  <!-- partial -->
   <script type="module" src="{% static 'land.js' %}"></script>
 
 </body>
+
 </html>
 {% endblock content %}
