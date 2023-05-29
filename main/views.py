@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect
 from . forms import UserForm
 from . models import User
 from django.contrib.auth.hashers import make_password, check_password
@@ -16,13 +16,23 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .uuid_gen import uuid_genrator
 from django.conf import settings
 from django.core.mail import send_mail
+from django.urls import reverse
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, "base.html", {"hii": "hello"})
-
+    try:
+        val = getcookies(request)
+        user = User.objects.get(session_id=val)
+        if not user.is_expired:
+            context = {"user_login":not (user.is_expired)}
+            return render(request, "base.html", context=context)
+        else:
+            return render(request, "base.html")
+    except Exception as e:
+        return render(request, "base.html")
+        
 
 def login(request):
     return render(request, 'login.html')
@@ -52,10 +62,17 @@ def login_logic(request):
                     session_id = uuid_genrator()
                     user_obj.session_id = session_id
                     user_obj.save()
-                    response = render(request, "dashboard.html", {
-                                      "message": "login sucessful"})
+                    # val = getcookies(request)
+                    user = 0
+
+                    # response = render(request, "dashboard.html", {
+                    #                   "message": "login sucessful"})
+                    response = redirect("dashboard")
                     response.set_cookie('session_id', session_id)
                     return response
+                else:
+                    return render(request, "login.html", {"message": "incorrect email or password or verify ypur email first"})
+                    
         except:
             return render(request, "login.html", {"message": "incorrect email or password or verify ypur email first"})
 
@@ -142,11 +159,33 @@ def reset(request):
 
 
 def dashboard(request):
-    val = getcookies(request)
-    user = User.objects.get(session_id=val)
-    if user:
-        return render(request, "dashboard.html")
+    try:
+        val = getcookies(request)
+        user = 0
+        user = User.objects.get(session_id=val)
 
+        if user:
+            return render(request, "dashboard.html", {"username":user.username})
+        else:
+            redirect_url_login = reverse("login")
+            return redirect(redirect_url_login)
+    except Exception as e:
+            redirect_url_login = reverse("login")
+            return redirect(redirect_url_login)
+        # return render(request, "dashboard.html")
+        
 
 def tinymce(request):
+    
+    return render(request, "tinymce.html")
+
+
+def tinymce_save(request):
+    if request.method == "POST":
+        
+    
+    
+        pass
+    
+    
     return render(request, "tinymce.html")
