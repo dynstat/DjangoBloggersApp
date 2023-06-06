@@ -50,7 +50,18 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <div class="row">
+                {% for obj in blogTitle%}
+                <div class="card" onclick="viewblog('{{ obj.id }}')" style="width: 20rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ obj.title }}</h5>
+                        <p class="card-text"><b>Untitled<b></p>
+                        <a href="{% url 'view_blog' id=obj.id %}" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+                <!-- <div class="row">
                     <div class="col-lg-12">
                         <h1>Simple Sidebar</h1>
                         <p>This template has a responsive menu toggling system. The menu will appear collapsed on
@@ -60,7 +71,7 @@
                         <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- /#page-content-wrapper -->
@@ -68,6 +79,18 @@
     </div>
     <!-- /#wrapper -->
     <!-- partial -->
+    <script>
+        function viewblog(blogid) {
+            var blogsection = document.querySelectorAll('[id^="content"]');
+            blogsection.forEach(function (section) {
+                section.style.display = 'none';
+            });
+            var blogsection = document.getElementById('content' + blogid);
+            blogsection.style.display = "block";
+        }
+    </script>
+
+
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js'></script>
     <script src="{% static 'dashboard.js' %}"> </script>
