@@ -17,3 +17,5 @@ class Blog(models.Model):
     rel_user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     title = models.TextField()
     content= models.TextField()
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now_add=True)
