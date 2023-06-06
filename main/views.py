@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect
 from . forms import UserForm
-from . models import User
+from . models import User, Blog
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils.encoding import smart_str
 from django.utils.encoding import force_bytes
@@ -163,9 +163,10 @@ def dashboard(request):
         val = getcookies(request)
         user = 0
         user = User.objects.get(session_id=val)
-
+        user_blog = Blog.objects.filter(rel_user=user)
+        # user_context = {"blogTitle": user_blog}
         if user:
-            return render(request, "dashboard.html", {"username":user.username})
+            return render(request, "dashboard.html", {"blogTitle": user_blog,"username":user.username})
         else:
             redirect_url_login = reverse("login")
             return redirect(redirect_url_login)
@@ -180,12 +181,23 @@ def tinymce(request):
     return render(request, "tinymce.html")
 
 
-def tinymce_save(request):
+def tinymce(request):
+    if request.method == "GET":
+        return render(request, "tinymce.html")
+
     if request.method == "POST":
-        
-    
-    
-        pass
-    
-    
+        val = getcookies(request)
+        user = User.objects.get(session_id=val)
+        content = request.POST["textarea"]
+        tinymce_obj = Blog.objects.create(title="Test", content=content, rel_user=user)
+        tinymce_obj.save()
     return render(request, "tinymce.html")
+
+
+def view_blog(request, id):
+    val = getcookies(request)
+    # user = User.objects.get(session_id=val)
+    user_blog = Blog.objects.get(id=id)
+    
+    user_context = {"blogTitle": user_blog.title, "blogContent": user_blog.content}
+    return render(request, "viewblog.html", context=user_context)
