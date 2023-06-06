@@ -11,33 +11,23 @@
 
 </head>
 
-
 <body>
   <!-- partial:index.partial.html -->
   <div id="html-app" class="container-fluid">
     <div class="row">
       <div class="col">
-        <form method="post" action="tinymce_save/{{  }}">
+        <form method="post" action="{% url 'tinymce' %}">
           {% csrf_token %}
-          <textarea id="textarea" name="textarea">
-          </textarea>
-          <button name="submitbtn"> Save Form</button>
-          <!--     <button name="submitbtn">Save</button> -->
+          <textarea id="textarea" name="textarea"></textarea>
+          <button name="submitbtn">Save</button>
         </form>
 
+
+        {% comment %}
       </div>
-      <!-- <div class="col">
-
-  <form method="post">
-    <div editable id="divarea">
-      <p>This section of content can be edited. Click here to see how.</p>
-    </div>
-  </form>
-
-</div> -->
     </div>
 
-  </div>
+  </div> {% endcomment %}
 
   <!--       <div id="lipsum"> -->
   <!-- <p> Finished on media button https://www.tinymce.com/docs/plugins/media/<br>

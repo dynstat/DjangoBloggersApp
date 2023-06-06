@@ -127,3 +127,11 @@ body {
         margin-right: 0;
     }
 }
+
+.card {
+    border: 1px solid #0f0e0e;
+    /* border-color: {{ border_color }; */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
