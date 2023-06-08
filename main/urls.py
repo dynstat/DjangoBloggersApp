@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 # for testing gunicor in production (DEBUG = True)
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
+# app_name = 'main'
 urlpatterns = [
     path('', views.home, name='home'),
     path('loginpg/', views.login, name='login'),
@@ -19,6 +19,8 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name="dashboard"),
     path('tinymce/', views.tinymce, name="tinymce"),
     path('view_blog/<id>/', views.view_blog, name="view_blog"),
+    path('edit_blog/<id>/', views.edit_blog, name="edit_blog"),
+    path('update_blog/<blogid>/', views.update_blog, name="update_blog"),
     
 #     path('tinymce_save/', views.tinymce_save, name="tinymce_save"),
 ]

@@ -188,8 +188,9 @@ def tinymce(request):
     if request.method == "POST":
         val = getcookies(request)
         user = User.objects.get(session_id=val)
-        content = request.POST["textarea"]
-        tinymce_obj = Blog.objects.create(title="Test", content=content, rel_user=user)
+        blog_content = request.POST["textarea"]
+        blog_title = request.POST["blogTitle"]
+        tinymce_obj = Blog.objects.create(title=blog_title, content=blog_content, rel_user=user)
         tinymce_obj.save()
     return render(request, "tinymce.html")
 
@@ -201,3 +202,35 @@ def view_blog(request, id):
     
     user_context = {"blogTitle": user_blog.title, "blogContent": user_blog.content}
     return render(request, "viewblog.html", context=user_context)
+
+def edit_blog(request, id):
+    val = getcookies(request)
+    # user = User.objects.get(session_id=val)
+    user_blog = Blog.objects.get(id=id)
+    # start_body_tag_idx = user_blog.content.find("<body>")
+    # end_body_tag_idx = user_blog.content.find("<body>")
+    # tinyMCE_content = user_blog.content[42:176+len("</body>")]
+    user_context = {"blogTitle": user_blog.title, "tinyMCE_content": user_blog.content, "blog_id":id}
+    return render(request, "edit_blog.html", context=user_context)
+
+
+def update_blog(request, blogid):
+    if request.method == "POST":
+        val = getcookies(request)
+        loggedin_user = User.objects.get(session_id=val)
+        
+        blog_to_edit = Blog.objects.get(id=blogid)
+        
+        # if blog_to_edit.rel_user == loggedin_user:
+        #     pass
+        
+        blog_content = request.POST["textarea"]
+        blog_title = request.POST["blogTitle"]
+        
+        blog_to_edit.title = blog_title
+        blog_to_edit.content = blog_content
+        
+        # tinymce_obj = Blog.objects.create(title=blog_title, content=blog_content, rel_user=loggedin_user)
+        blog_to_edit.save()
+    # return render(request, "viewblog.html")
+    return redirect(reverse('view_blog', kwargs={'id': blogid}))
