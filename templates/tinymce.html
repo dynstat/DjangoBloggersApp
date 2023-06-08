@@ -5,19 +5,25 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Customizing Tiny MCE HTML Editor</title>
+  <title>Blog </title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
   <link rel="stylesheet" href="{% static 'tinymce.css' %}">
 
 </head>
 
 <body>
+
+
+
   <!-- partial:index.partial.html -->
   <div id="html-app" class="container-fluid">
     <div class="row">
       <div class="col">
         <form method="post" action="{% url 'tinymce' %}">
           {% csrf_token %}
+          <div class="input-wrapper">
+            <input type="text" name="blogTitle" id="blogTitle" placeholder="Blog Title">
+          </div>
           <textarea id="textarea" name="textarea"></textarea>
           <button name="submitbtn">Save</button>
         </form>
@@ -29,23 +35,6 @@
 
   </div> {% endcomment %}
 
-  <!--       <div id="lipsum"> -->
-  <!-- <p> Finished on media button https://www.tinymce.com/docs/plugins/media/<br>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt, lacus ut sollicitudin volutpat, nisl nisi fringilla orci, nec vulputate purus erat vitae velit. Mauris vestibulum nibh et efficitur placerat. Nullam in ligula ac justo finibus finibus. Fusce et elementum nisl. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque nec nisi et lorem tincidunt laoreet. Ut at tortor in ex elementum vehicula sed ac ligula. Curabitur viverra ultrices mi ac commodo. In in luctus urna. Aliquam blandit massa id sodales sodales.
-</p>
-<p class="mceNonEditable_deletethis">
-Pellentesque dapibus ultricies odio, vitae suscipit metus placerat et. Vestibulum semper enim ac egestas pulvinar. Nullam nec volutpat elit. Maecenas sodales porta sapien pharetra auctor. Phasellus suscipit volutpat tortor, quis ornare nunc rutrum efficitur. Etiam sed dictum lectus. Nulla eget tempus est. Mauris a nunc pulvinar, pretium urna vitae, feugiat dui. Aenean nisl orci, ultricies eu posuere vel, varius quis mauris. In pretium leo eu enim dignissim dictum. Mauris ac nunc eget metus egestas gravida ac vel nibh. Proin consectetur sagittis sem, eu consequat ex dignissim eget. Suspendisse dui tortor, condimentum sed sagittis ac, tempus non leo. Sed aliquet dui ac tellus tristique, eget sollicitudin purus aliquam. Maecenas eu vulputate sapien. Donec sapien tellus, suscipit feugiat molestie vitae, tempor volutpat mauris.
-</p>
-<p>
-Morbi vitae aliquam nibh, vitae sodales ipsum. Nulla eget condimentum odio, quis auctor risus. Mauris ut ante dolor. Quisque consequat non arcu non pharetra. Phasellus tristique nulla quis odio finibus, eu euismod nunc bibendum. Nulla accumsan tempus lectus, quis dignissim eros. Aliquam aliquam euismod lacus, eget maximus arcu iaculis sit amet.
-</p>
-<p>
-Nullam malesuada justo ac leo tempor ullamcorper. Quisque et blandit lectus, vitae scelerisque turpis. Nulla pretium neque nec efficitur faucibus. Mauris a dapibus massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit orci quam, et hendrerit justo condimentum lobortis. Nunc elementum erat enim, sit amet vulputate quam feugiat ac. Donec bibendum interdum condimentum. Nulla ut nisi mollis, pharetra ex ac, suscipit purus. Duis iaculis sit amet tortor quis imperdiet. Praesent in efficitur risus. Praesent ac dignissim est, lacinia commodo lectus. Curabitur blandit, felis quis volutpat faucibus, neque lorem tincidunt dolor, in dapibus lectus urna vitae elit. Vivamus vulputate ex in lectus scelerisque, eget vulputate tellus elementum. In ornare facilisis consequat. Nam at sapien lectus.
-</p>
-<p>
-Fusce quis enim feugiat, aliquam mauris at, faucibus velit. Pellentesque varius, neque id pulvinar porttitor, nunc velit scelerisque est, sit amet dictum mauris augue eu nisl. Aenean semper consectetur ligula. Curabitur molestie, nibh eget feugiat faucibus, quam elit bibendum ex, et facilisis est nisi vel eros. Integer at pellentesque orci. Fusce facilisis laoreet metus quis condimentum. Suspendisse pretium ornare euismod. In eu massa vel enim interdum scelerisque quis ac risus. Suspendisse porttitor a quam sed sagittis. Suspendisse tortor odio, volutpat eget sollicitudin et, eleifend id est. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas tincidunt, odio ac congue suscipit, nunc eros varius mi, nec placerat purus ipsum nec odio.
-</p></div>-->
-  <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.2/tinymce.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js'></script>
   <script src="{% static 'tinymce.js' %}"></script>
