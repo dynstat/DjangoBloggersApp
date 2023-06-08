@@ -56,6 +56,7 @@
                         <h5 class="card-title">{{ obj.title }}</h5>
                         <p class="card-text"><b>Untitled<b></p>
                         <a href="{% url 'view_blog' id=obj.id %}" class="btn btn-primary">View</a>
+                        <a href="{% url 'edit_blog' id=obj.id %}" class="btn btn-primary">Edit</a>
                     </div>
                 </div>
                 {% endfor %}
