@@ -1,2 +1,20 @@
 {% load static %}
-{{ blogContent|safe }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="{% url 'create_pub_url' blogid=blog.id %}"> PUBLISH</a>
+    {% if blog.publish_active %}
+    <label for="">Published at:</label> <a href="{% url 'pub' uid=pub_uid %}">{{ blog.published_url }}</a>
+    {% endif %}
+    {{ blogContent|safe }}
+
+</body>
+
+</html>
