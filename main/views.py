@@ -246,6 +246,7 @@ def view_blog(request, id):
             "blogTitle": user_blog.title,
             "blogContent": user_blog.content,
             "blog": user_blog,
+            "pub_uid": uid,
         }
     else:
         user_context = {
@@ -296,27 +297,28 @@ def update_blog(request, blogid):
 
 
 def create_pub_url(request, blogid):
-    id = uuid_genrator()
+    uid = uuid_genrator()
     val = getcookies(request)
     loggedin_user = User.objects.get(session_id=val)
     related_blog = Blog.objects.get(id=blogid)
 
     # constructing url
     hostname = request.META.get("HTTP_HOST")
-    url = f"{hostname}/pub/{id}/"
+    url = f"{hostname}/pub/{uid}/"
     # new_pub_blog =
     related_blog.published_url = url
     related_blog.publish_active = True
     related_blog.save()
 
-    if Published.objects.filter(rel_blog=related_blog).exists():
+    is_pub_obj_exists = Published.objects.filter(rel_blog=related_blog).exists()
+    if is_pub_obj_exists:
         rel_pub_obj = Published.objects.get(rel_blog=related_blog)
-        rel_pub_obj.uid = id
+        rel_pub_obj.uid = uid
         rel_pub_obj.save()
     else:
-        rel_pub_obj = Published(uid=id, rel_blog=related_blog)
+        rel_pub_obj = Published(uid=uid, rel_blog=related_blog)
         rel_pub_obj.save()
-    return redirect(reverse("pub", kwargs={"uid": id}))
+    return redirect(reverse("pub", kwargs={"uid": uid}))
 
 
 def pub(request, uid):
@@ -330,3 +332,7 @@ def pub(request, uid):
         "pub_uid": uid,
     }
     return render(request, "viewblog.html", context=user_context)
+
+
+def urltodb(request):
+    pass
