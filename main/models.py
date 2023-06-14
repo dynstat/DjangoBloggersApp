@@ -26,5 +26,6 @@ class Blog(models.Model):
 
 
 class Published(models.Model):
-    uid = models.CharField(max_length=100, primary_key=True)
+    id = models.AutoField(default=1, primary_key=True)
+    uid = models.CharField(max_length=100)
     rel_blog = models.ForeignKey(Blog, null=False, on_delete=models.CASCADE)
