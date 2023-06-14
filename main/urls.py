@@ -28,5 +28,6 @@ urlpatterns = [
     path("create_pub_url/<blogid>/", views.create_pub_url, name="create_pub_url"),
     path("pub/<uid>/", views.pub, name="pub"),
     #     path('tinymce_save/', views.tinymce_save, name="tinymce_save"),
+    path("urltodb/", views.urltodb, name="urltodb"),
 ]
 urlpatterns += staticfiles_urlpatterns()

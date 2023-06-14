@@ -6,14 +6,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'view_blog.css' %}">
 </head>
 
 <body>
+    <div class="button-container">
+        <button type="button" onclick="toggleForm()">Open Form</button>
+    </div>
+    <div id="popup-form" class="form-container">
+        <form>
+            <div>
+                <label for="published-url">Published URL:</label>
+                <input type="text" id="published-url" name="published-url">
+                <button type="button" onclick="copyUrl()">Copy URL</button>
+            </div>
+
+            <div>
+                <button type="button">Edit</button>
+                <button type="button">Preview</button>
+            </div>
+
+            <div>
+                <label for="read-permissions">Read Permissions:</label>
+                <select id="read-permissions" name="read-permissions">
+                    <option value="everyone">Everyone</option>
+                    <option value="onlyme">Only Me</option>
+                    <option value="signed-in-users">Signed-in Users</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="write-permissions">Write Permissions:</label>
+                <select id="write-permissions" name="write-permissions">
+                    <option value="everyone">Everyone</option>
+                    <option value="onlyme">Only Me</option>
+                    <option value="signed-in-users">Signed-in Users</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+
+
+
     <a href="{% url 'create_pub_url' blogid=blog.id %}"> PUBLISH</a>
-    {% if blog.publish_active %}
+    {% if blog.publish_active and pub_uid %}
     <label for="">Published at:</label> <a href="{% url 'pub' uid=pub_uid %}">{{ blog.published_url }}</a>
     {% endif %}
     {{ blogContent|safe }}
+    <button onclick="display_url()">Publish</button>
+    <div id="pub_url"></div>
+
+    <script src="{% static 'view_blog.js' %}"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <script>
+        function toggleForm() {
+            var form = document.getElementById('popup-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function copyUrl() {
+            var urlInput = document.getElementById('published-url');
+            urlInput.select();
+            document.execCommand('copy');
+        }
+    </script>
 
 </body>
 
