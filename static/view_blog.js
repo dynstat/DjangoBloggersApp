@@ -1,3 +1,27 @@
+let g_url = "";
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    g_url = generateRandomUrlSafeString(6)
+});
+function toggleForm() {
+    var form = document.getElementById('popup-form');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+
+    url_inp_field = document.getElementById("published-url")
+    url_inp_field.value = g_url;
+
+
+}
+
+function copyUrl() {
+    var urlInput = document.getElementById('published-url');
+    urlInput.select();
+    document.execCommand('copy');
+}
+
+
+
 function display_url() {
     var url_elem = document.getElementById("pub_url");
     url = `http://www.abcd.com/pub/${generateRandomUrlSafeString(6)}`
@@ -33,11 +57,6 @@ function display_url() {
             // Handle any errors that occur during the request
             // ...
         });
-
-
-
-
-
 }
 
 function generateRandomUrlSafeString(length) {

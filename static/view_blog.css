@@ -41,3 +41,7 @@
   .form-container button:hover {
       background-color: #45a049;
   }
+
+  #popup-form {
+      display: none;
+  }
