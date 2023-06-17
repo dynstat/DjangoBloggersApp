@@ -29,3 +29,8 @@ class Published(models.Model):
     id = models.AutoField(default=1, primary_key=True)
     uid = models.CharField(max_length=100)
     rel_blog = models.ForeignKey(Blog, null=False, on_delete=models.CASCADE)
+
+
+class DemoUrl(models.Model):
+    demo_uid = models.CharField(max_length=100, default="")
+    rel_blog = models.ForeignKey(Blog, null=False, on_delete=models.CASCADE)
