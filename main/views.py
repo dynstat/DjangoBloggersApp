@@ -4,6 +4,7 @@ from .models import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils.encoding import smart_str
 from django.utils.encoding import force_bytes
+from django.http import JsonResponse
 
 # urlsafe_base64_encode() and urlsafe_base64_decode() functions in Django are used to encode and decode data in a way that is safe
 # to use in URLs. The urlsafe_base64_encode() function takes a string as input and returns a base64-encoded string that does not
@@ -334,5 +335,17 @@ def pub(request, uid):
     return render(request, "viewblog.html", context=user_context)
 
 
-def urltodb(request):
-    pass
+def urltodb(request, blog_uid):
+    blog_id = int(blog_uid)
+    related_blog = Blog.objects.get(id=blog_id)
+    is_pub_obj_exists = DemoUrl.objects.filter(rel_blog=related_blog).exists()
+    if is_pub_obj_exists:
+        rel_pub_obj = DemoUrl.objects.get(rel_blog=related_blog)
+        demo_uid = rel_pub_obj.demo_uid
+        data = {"url_available": True, "demo_uid": f"{demo_uid}"}
+    else:
+        demo_uid = uuid_genrator()
+        new_demo_obj = DemoUrl(demo_uid=demo_uid, rel_blog=related_blog)
+        new_demo_obj.save()
+        data = {"url_available": False, "demo_uid": demo_uid}
+    return JsonResponse(data)

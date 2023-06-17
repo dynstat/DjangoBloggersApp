@@ -1,16 +1,36 @@
 let g_url = "";
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    g_url = generateRandomUrlSafeString(6)
-});
 function toggleForm() {
     var form = document.getElementById('popup-form');
     form.style.display = form.style.display === 'none' ? 'block' : 'none';
 
-    url_inp_field = document.getElementById("published-url")
-    url_inp_field.value = g_url;
+    var csrftoken = Cookies.get('csrftoken');
 
+    const endpoint = window.location.pathname;
+    const blogid = parseInt(endpoint.split('/')[2]);
+
+    data = { 'blogid': blogid }
+
+    fetch(`/urltodb/${blogid}/  `, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            g_url = data.demo_uid;
+            // Handle the retrieved data
+        })
+        .catch(error => {
+            // Handle any errors
+        });
+
+
+    var url_inp_field = document.getElementById("published-url")
+    url_inp_field.value = g_url;
 
 }
 
