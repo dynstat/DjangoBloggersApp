@@ -2,7 +2,7 @@ let g_url = "";
 
 function toggleForm() {
     var form = document.getElementById('popup-form');
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    form.style.display = form.style.display === 'none' | form.style.display === '' ? 'block' : 'none';
 
     var csrftoken = Cookies.get('csrftoken');
 
@@ -23,6 +23,8 @@ function toggleForm() {
         .then(data => {
             g_url = data.demo_uid;
             // Handle the retrieved data
+            var url_inp_field = document.getElementById("published-url")
+            url_inp_field.value = g_url;
         })
         .catch(error => {
             // Handle any errors
@@ -30,7 +32,7 @@ function toggleForm() {
 
 
     var url_inp_field = document.getElementById("published-url")
-    url_inp_field.value = g_url;
+    url_inp_field.value = "Waiting...";
 
 }
 
