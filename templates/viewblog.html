@@ -28,7 +28,7 @@
 
             <div>
                 <label for="read-permissions">Read Permissions:</label>
-                <select id="read-permissions" name="read-permissions">
+                <select id="read-permissions" name="read-permissions" onchange="change_read_perm()">
                     <option value="everyone">Everyone</option>
                     <option value="onlyme">Only Me</option>
                     <option value="signed-in-users">Signed-in Users</option>

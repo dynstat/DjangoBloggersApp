@@ -93,3 +93,39 @@ function generateRandomUrlSafeString(length) {
     var urlSafeString = encodeURIComponent(randomString);
     return urlSafeString;
 }
+
+
+
+
+function change_read_perm() {
+    let read_perm_elm = document.getElementById("read-permissions");
+    let write_perm_elm = document.getElementById("write-permissions");
+
+    let read_perm_elm_val = read_perm_elm.value;
+    let write_perm_elm_val = write_perm_elm.value;
+
+    data = { "new_read": read_perm_elm_val, "new_write": write_perm_elm_val }
+
+    var csrftoken = Cookies.get('csrftoken');
+
+    const endpoint = window.location.pathname;
+    const blogid = parseInt(endpoint.split('/')[2]);
+
+    fetch(`/perm/${blogid}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Permissions modified");
+            // Handle the retrieved data
+        })
+        .catch(error => {
+            // Handle any errors
+        });
+
+}

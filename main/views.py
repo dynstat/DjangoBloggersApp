@@ -349,3 +349,19 @@ def urltodb(request, blog_uid):
         new_demo_obj.save()
         data = {"url_available": False, "demo_uid": demo_uid}
     return JsonResponse(data)
+
+
+def perm(request, blog_uid):
+    blog_id = int(blog_uid)
+    related_blog = Blog.objects.get(id=blog_id)
+    is_pub_obj_exists = DemoUrl.objects.filter(rel_blog=related_blog).exists()
+    if is_pub_obj_exists:
+        rel_pub_obj = DemoUrl.objects.get(rel_blog=related_blog)
+        demo_uid = rel_pub_obj.demo_uid
+        data = {"url_available": True, "demo_uid": f"{demo_uid}"}
+    else:
+        demo_uid = uuid_genrator()
+        new_demo_obj = DemoUrl(demo_uid=demo_uid, rel_blog=related_blog)
+        new_demo_obj.save()
+        data = {"url_available": False, "demo_uid": demo_uid}
+    return JsonResponse(data)
