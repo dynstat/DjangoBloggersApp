@@ -37,7 +37,7 @@ def home(request):
         return render(request, "base.html")
 
 
-def login(request):
+def login(request, *args, **kwargs):
     return render(request, "login.html")
 
 
@@ -365,3 +365,23 @@ def perm(request, blog_uid):
         new_demo_obj.save()
         data = {"url_available": False, "demo_uid": demo_uid}
     return JsonResponse(data)
+
+
+def link(request):
+    val = getcookies(request)
+    if val:
+        try:
+            loggedin_user = User.objects.get(session_id=val)
+            tg_id = request.GET["tgid"]
+
+            loggedin_user.tg_id = tg_id
+            loggedin_user.save()
+            return HttpResponse("SUCCESS")
+        except:
+            return HttpResponse("some error")
+    else:
+        try:
+            tg_id = request.GET["tgid"]
+            return redirect(f"/loginpg?tgid={tg_id}")
+        except:
+            return HttpResponse("Nahi mili tgid")

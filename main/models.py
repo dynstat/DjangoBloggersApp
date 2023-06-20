@@ -13,6 +13,7 @@ class User(models.Model):
     last_login = models.DateTimeField(default=timezone.now)
     email_verification = models.BooleanField(default=0)
     is_expired = models.BooleanField(default=False)
+    tg_id = models.IntegerField(default=0)
 
 
 class Blog(models.Model):
