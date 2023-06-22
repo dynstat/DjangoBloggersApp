@@ -1,25 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <head>
-    <link href="{% static 'login.css' %}" rel = "stylesheet">
+    <link href="{% static 'login.css' %}" rel="stylesheet">
 </head>
-    <body>
-        <div class="loginbox">
+
+<body>
+    <div class="loginbox">
         <img src="http://comic-cons.xyz/wp-content/uploads/Star-Wars-avatar-icon-Greedo.png" class="avatar">
-        
+
         <h1>Login Here</h1>
-            <form method = "post" action="{% url 'login_logic' %}">
+        <form method="post" action="{% url 'login_logic' %}">
             {% csrf_token %}
             <p>Email</p>
-                <input type="text" name="email" placeholder="Enter Codename">
-                <p>Passcode</p>
-                <input type="password" name="password" placeholder="Enter Passcode">
-                <input type="submit" name="" value = "Login">
-                <a href="{% url 'forget_passcode' %}">Lost your passcode?</a><br>
-                <a href="{% url 'signup' %}">Don't have an account?</a>
-                <p>{{ message }}</p>
-            </form>
-        </div>
-        </body>
+            <input type="text" name="email" placeholder="Enter Codename">
+            <p>Passcode</p>
+            <input type="password" name="password" placeholder="Enter Passcode">
+            <input type="submit" name="" value="Login">
+            <a id="forget-pass-link" href="{% url 'forget_passcode' %}">Lost your passcode?</a><br>
+            <a id="signup-link" href="{% url 'signup' %}">Don't have an account?</a>
+            <p>{{ message }}</p>
+        </form>
+    </div>
+    <script src="{% static 'login.js' %}"> </script>
+</body>
 {% endblock %}
