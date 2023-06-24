@@ -44,4 +44,6 @@
 
   #popup-form {
       display: none;
+      position: fixed;
+      right: 2rem;
   }
